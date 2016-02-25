@@ -15,7 +15,6 @@ const babelLoader = {
     ],
     query: {
         presets: [
-            require.resolve('babel-preset-react'),
             require.resolve('babel-preset-es2015'),
             require.resolve('babel-preset-stage-1') // Note: stage-1 should be after es2015 in order to work
         ]
@@ -28,15 +27,12 @@ module.exports = {
 
         output: { libraryTarget: 'umd' },
 
-        externals: { "react": "React", "react-dom": "ReactDOM" },
-
         plugins: [
-            commonTasks.extractCssPlugin(),
             commonTasks.uglifyJsPlugin()
         ],
 
         module: {
-            loaders: [ babelLoader, commonTasks.CDNSassLoader ]
+            loaders: [ babelLoader ]
         }
     }, // CDN
 
@@ -45,12 +41,8 @@ module.exports = {
 
         output: { libraryTarget: 'commonjs2' },
 
-        externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ],
-
-        plugins: [ commonTasks.extractCssPlugin() ],
-
         module: {
-            loaders: [ babelLoader, commonTasks.npmPackageSassLoader ]
+            loaders: [ babelLoader ]
         }
     }, // npmPackage
 
@@ -64,20 +56,12 @@ module.exports = {
         resolve,
 
         externals: {
-            'react/lib/ExecutionEnvironment': true,
             "cheerio": "global"
         },
 
-        plugins: [
-            // skin deep needs this
-            // https://github.com/glenjamin/skin-deep#errors-when-bundling
-            new commonTasks.webpack.IgnorePlugin(/ReactContext/)
-        ],
-
         module: {
             loaders: [
-                babelLoader,
-                { test: /\.scss$/, loader: require.resolve('./stub-loader') }
+                babelLoader
             ]
         }
     } // test

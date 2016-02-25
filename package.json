@@ -1,15 +1,14 @@
 {
-  "name": "@telerik/kendo-react-tasks",
+  "name": "@telerik/kendo-external-package-tasks",
   "version": "0.1.0",
-  "description": "An internal utility package exporting gulp tasks for the Kendo React components infrastructure",
-  "repository": "telerik/kendo-react-tasks",
+  "description": "An internal utility package exporting gulp tasks for the external components infrastructure",
+  "repository": "telerik/kendo-external-package-tasks",
   "main": "gulp-tasks.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint ."
   },
   "keywords": [
-    "Kendo UI",
-    "React"
+    "Kendo UI"
   ],
   "dependencies": {
     "@telerik/eslint-config": "telerik/eslint-config-kendo#master",
@@ -18,18 +17,13 @@
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-transform-es2015-modules-umd": "~6",
     "babel-preset-es2015": "~6",
-    "babel-preset-react": "~6",
     "babel-preset-stage-1": "~6",
     "babel-traverse": "6.3.19",
-    "enzyme": "^2.0.0-rc1",
     "extract-text-webpack-plugin": "^0.9.1",
     "gulp-jasmine": "^2.2.1",
     "jasmine-reporters": "^2.1.1",
     "jasmine-spec-reporter": "^2.4.0",
-    "@telerik/kendo-common-tasks": "telerik/kendo-common-tasks#master",
-    "react": "^0.14.3",
-    "react-addons-test-utils": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "@telerik/kendo-common-tasks": "telerik/kendo-common-tasks#master"
   },
   "author": "Telerik",
   "license": "Apache-2.0",
