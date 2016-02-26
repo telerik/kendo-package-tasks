@@ -46,12 +46,6 @@ module.exports = {
         }
     }, // npmPackage
 
-    dev: commonTasks.webpackDevConfig({
-        resolve,
-        loaders: [ babelLoader ],
-        entries: 'examples/*.jsx'
-    }), // dev
-
     test: {
         resolve,
 
