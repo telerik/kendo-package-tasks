@@ -1,13 +1,13 @@
 const commonTasks = require('@telerik/kendo-common-tasks');
 const path = require('path');
 
-const sourceExtensions = [ '.jsx' ];
+const sourceExtensions = [ '.js' ];
 const nodeModulesPath = path.join(__dirname, 'node_modules');
 
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
 const babelLoader = {
-    test: /\.jsx?$/,
+    test: /\.js?$/,
     exclude: /(node_modules|bower_components)/,
     loader: require.resolve('babel-loader'),
     plugins: [
