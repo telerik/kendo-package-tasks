@@ -1,17 +1,22 @@
 {
   "name": "@telerik/kendo-package-tasks",
-  "version": "0.1.0",
   "description": "An utility package exporting gulp tasks for Kendo UI NPM packages",
-  "repository": "telerik/kendo-package-tasks",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/telerik/kendo-package-tasks.git"
+  },
   "main": "gulp-tasks.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "Kendo UI"
   ],
   "dependencies": {
-    "@telerik/eslint-config": "telerik/eslint-config-kendo#master",
+    "@telerik/eslint-config": "^1.1.0",
+    "@telerik/kendo-common-tasks": "^1.0.1",
     "babel-core": "~6",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -21,15 +26,15 @@
     "babel-traverse": "6.3.19",
     "gulp-jasmine": "^2.2.1",
     "jasmine-reporters": "^2.1.1",
-    "jasmine-spec-reporter": "^2.4.0",
-    "@telerik/kendo-common-tasks": "telerik/kendo-common-tasks#master"
+    "jasmine-spec-reporter": "^2.4.0"
   },
   "author": "Telerik",
   "license": "Apache-2.0",
   "devDependencies": {
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "^1.0.3",
-    "validate-commit-msg": "^1.1.1"
+    "validate-commit-msg": "^1.1.1",
+    "semantic-release": "^4.3.5"
   },
   "config": {
     "commitizen": {
