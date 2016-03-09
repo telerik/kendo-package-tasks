@@ -1,7 +1,6 @@
 {
   "name": "@telerik/kendo-package-tasks",
   "description": "An utility package exporting gulp tasks for Kendo UI NPM packages",
-  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/telerik/kendo-package-tasks.git"
