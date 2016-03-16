@@ -6,9 +6,10 @@ const commonTasks = require('@telerik/kendo-common-tasks');
 const SRC = "src/*.js";
 const TESTS = "test/**/*.js";
 const SRC_TESTS = [ SRC, TESTS ];
+const DTS = "src/*.d.ts";
 
 module.exports = function(gulp, libraryName) {
-    commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig);
+    commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS);
 
     gulp.task('test', () =>
         gulp.src(TESTS)
