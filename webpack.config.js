@@ -6,6 +6,8 @@ const nodeModulesPath = path.join(__dirname, 'node_modules');
 
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
+const packageInfo = require(path.join(process.cwd(), 'package.json'));
+
 const babelLoader = {
     test: /\.js?$/,
     exclude: /(node_modules|bower_components)/,
@@ -58,6 +60,36 @@ module.exports = {
                 babelLoader
             ]
         }
-    } // test
+    }, // test
+
+    e2e: {
+        resolve: {
+            cache: false,
+            fallback: resolve.fallback,
+            alias: {
+                "./e2e": process.cwd() + "/e2e",
+                "e2e-utils": require.resolve("./e2e-utils.js"),
+                [packageInfo.name]: '../src/main'
+            },
+            extensions: [ '', '.js' ]
+        },
+        devtool: 'inline-source-map',
+        module: {
+            preLoaders: [
+                {
+                    test: /\.js$/,
+                    loader: require.resolve("source-map-loader")
+                }
+            ],
+            loaders: [
+                babelLoader
+            ]
+        },
+        stats: { colors: true, reasons: true },
+        debug: false,
+        plugins: [
+            new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
+        ]
+    }
 
 }; // module.exports
