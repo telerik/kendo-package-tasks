@@ -23,6 +23,13 @@ const babelLoader = {
     }
 };
 
+const jsonLoader = {
+  test: /\.json?$/,
+  loader: require.resolve('json-loader')
+};
+
+const loaders = [ babelLoader, jsonLoader ];
+
 module.exports = {
     CDN: {
         resolve,
@@ -34,7 +41,7 @@ module.exports = {
         ],
 
         module: {
-            loaders: [ babelLoader ]
+            loaders: loaders
         }
     }, // CDN
 
@@ -44,7 +51,7 @@ module.exports = {
         output: { libraryTarget: 'commonjs2' },
 
         module: {
-            loaders: [ babelLoader ]
+            loaders: loaders
         }
     }, // npmPackage
 
@@ -56,9 +63,7 @@ module.exports = {
         },
 
         module: {
-            loaders: [
-                babelLoader
-            ]
+            loaders: loaders
         }
     }, // test
 
@@ -81,9 +86,7 @@ module.exports = {
                     loader: require.resolve("source-map-loader")
                 }
             ],
-            loaders: [
-                babelLoader
-            ]
+            loaders: loaders
         },
         stats: { colors: true, reasons: true },
         debug: false,

@@ -26,6 +26,7 @@
     "gulp-jasmine": "^2.2.1",
     "jasmine-reporters": "^2.1.1",
     "jasmine-spec-reporter": "^2.4.0",
+    "json-loader": "^0.5.4",
     "chai": "^3.5.0",
     "chai-jquery": "^2.0.0",
     "jquery": "^2.2.1",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "^1.0.3",
+    "json-loader": "^0.5.4",
     "validate-commit-msg": "^1.1.1",
     "semantic-release": "^4.3.5"
   },
