@@ -50,6 +50,8 @@ module.exports = {
 
         output: { libraryTarget: 'commonjs2' },
 
+        externals: [/^(\.){1,2}\//],
+
         module: {
             loaders: loaders
         }
