@@ -10,7 +10,12 @@ const SRC_TESTS = [ SRC, TESTS ];
 const DTS = "src/*.d.ts";
 const e2eConfigPath = path.join(__dirname, 'e2e.conf.js');
 
-module.exports = function(gulp, libraryName) {
+module.exports = function(gulp, libraryName, options) {
+
+    if (options && options.packageExternals) {
+        webpackConfig.npmPackage.externals = webpackConfig.npmPackage.externals.concat(options.packageExternals);
+    }
+
     commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS);
 
     gulp.task('test', () =>
