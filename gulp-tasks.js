@@ -4,7 +4,7 @@ const specReporter = require('jasmine-spec-reporter');
 const webpackConfig = require('./webpack.config.js');
 const commonTasks = require('@telerik/kendo-common-tasks');
 
-const SRC = "src/*.js";
+const SRC = "src/**/*.js";
 const TESTS = "test/**/*.js";
 const SRC_TESTS = [ SRC, TESTS ];
 const DTS = "src/*.d.ts";
