@@ -26,7 +26,7 @@ const babelLoader = {
 };
 
 const jsonLoader = {
-    jtest: /\.json?$/,
+    test: /\.json?$/,
     loader: require.resolve('json-loader')
 };
 
