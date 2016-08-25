@@ -7,6 +7,8 @@ const nodeModulesPath = path.join(__dirname, 'node_modules');
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
 const packageInfo = require(path.join(process.cwd(), 'package.json'));
+const packageDependencies = Object.keys(packageInfo["dependencies"] || {})
+    .map(dep => new RegExp(`^${dep}`));
 
 const babelLoader = {
     test: /\.js?$/,
@@ -24,8 +26,8 @@ const babelLoader = {
 };
 
 const jsonLoader = {
-  test: /\.json?$/,
-  loader: require.resolve('json-loader')
+    jtest: /\.json?$/,
+    loader: require.resolve('json-loader')
 };
 
 const loaders = [ babelLoader, jsonLoader ];
@@ -50,7 +52,10 @@ module.exports = {
 
         output: { libraryTarget: 'commonjs2' },
 
-        externals: [/^(\.){1,2}\//],
+        externals: [
+            /^\.\//,
+            /^\.\.\//
+        ].concat(packageDependencies),
 
         module: {
             loaders: loaders
