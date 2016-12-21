@@ -46,13 +46,12 @@ module.exports = function(gulp, libraryName, options) {
     gulp.task('watch-e2e', (done) =>
         commonTasks.startKarma(done, e2eConfigPath, false));
 
-    gulp.task('clean-dist', (done) => rimraf('dist', done));
-
-    gulp.task('bundle-typings', [ 'clean-dist' ], () =>
+    gulp.task('bundle-typings', [ 'clean-es-bundle' ], () =>
         gulp.src(TYPINGS)
             .pipe(gulp.dest('dist/es'))
     );
 
+    gulp.task('clean-es-bundle', (done) => rimraf('dist/es', done));
     gulp.task('es-bundle', [ 'bundle-typings' ], () =>
         gulp.src(SRC)
             .pipe(sourcemaps.init())
@@ -65,7 +64,8 @@ module.exports = function(gulp, libraryName, options) {
             .pipe(gulp.dest('dist/es'))
     );
 
-    gulp.task('cjs-bundle', [ 'clean-dist' ], () =>
+    gulp.task('clean-cjs-bundle', (done) => rimraf('dist/npm', done));
+    gulp.task('cjs-bundle', [ 'clean-cjs-bundle' ], () =>
         rollup({
             entry: 'src/main.js',
             format: 'cjs',
@@ -84,5 +84,5 @@ module.exports = function(gulp, libraryName, options) {
     gulp.task('build-module', [ 'es-bundle', 'cjs-bundle' ]);
 
     // Alias for backwards-compatibility
-    gulp.task('build-rollup-package', ['build-module']);
+    gulp.task('build-rollup-package', [ 'build-module' ]);
 };
