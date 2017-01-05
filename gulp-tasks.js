@@ -11,10 +11,11 @@ const source = require('vinyl-source-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const specReporter = require('jasmine-spec-reporter');
 const webpackConfig = require('./webpack.config.js');
+const argv = require('yargs').argv;
 
 const SRC = "src/**/*.js";
 const TYPINGS = "src/**/*.d.ts";
-const TESTS = "test/**/*.js";
+const TESTS = argv.tests || "test/**/*.js";
 const SRC_TESTS = [ SRC, TESTS ];
 const DTS = "src/*.d.ts";
 const e2eConfigPath = path.join(__dirname, 'e2e.conf.js');
