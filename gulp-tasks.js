@@ -3,6 +3,7 @@ const buffer = require('vinyl-buffer');
 const commonTasks = require('@telerik/kendo-common-tasks');
 const jasmine = require('gulp-jasmine');
 const path = require('path');
+const merge = require('merge2');
 const rimraf = require('rimraf');
 const rollup = require('rollup-stream');
 const rollupBuble = require('rollup-plugin-buble');
@@ -64,22 +65,31 @@ module.exports = function(gulp, libraryName, options) {
             .pipe(gulp.dest('dist/es'))
     );
 
+    let entries = [ 'main.js' ];
+    if (options && options.entries) {
+        entries = options.entries;
+    }
+
     gulp.task('clean-cjs-bundle', (done) => rimraf('dist/npm', done));
-    gulp.task('cjs-bundle', [ 'clean-cjs-bundle' ], () =>
-        rollup({
-            entry: 'src/main.js',
-            format: 'cjs',
-            sourceMap: true,
-            plugins: [ rollupBuble() ]
-        })
-        .pipe(source('main.js', 'src'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({
-            loadMaps: true
-        }))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/npm'))
-    );
+    gulp.task('cjs-bundle', [ 'clean-cjs-bundle' ], () => {
+        const tasks = entries.map((entry) =>
+            rollup({
+                entry: 'src/' + entry,
+                format: 'cjs',
+                sourceMap: true,
+                plugins: [ rollupBuble() ]
+            })
+            .pipe(source(entry, 'src'))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({
+                loadMaps: true
+            }))
+            .pipe(sourcemaps.write('.'))
+            .pipe(gulp.dest('dist/npm'))
+        );
+
+        return merge(tasks);
+    });
 
     gulp.task('build-module', [ 'es-bundle', 'cjs-bundle' ]);
 
