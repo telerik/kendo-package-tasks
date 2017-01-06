@@ -71,11 +71,16 @@ module.exports = function(gulp, libraryName, options) {
         entries = options.entries;
     }
 
+    const externals = (entry) => entries
+        .filter((other) => other !== entry)
+        .map(ext => path.resolve('./src/' + ext));
+
     gulp.task('clean-cjs-bundle', (done) => rimraf('dist/npm', done));
     gulp.task('cjs-bundle', [ 'clean-cjs-bundle' ], () => {
         const tasks = entries.map((entry) =>
             rollup({
                 entry: 'src/' + entry,
+                external: externals(entry),
                 format: 'cjs',
                 sourceMap: true,
                 plugins: [ rollupBuble() ]
