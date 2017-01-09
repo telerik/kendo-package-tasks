@@ -1,3 +1,5 @@
+"use strict";
+
 const buble = require('gulp-buble');
 const buffer = require('vinyl-buffer');
 const commonTasks = require('@telerik/kendo-common-tasks');
