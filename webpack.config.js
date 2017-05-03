@@ -71,7 +71,9 @@ module.exports = {
 
         module: {
             loaders: loaders
-        }
+        },
+
+        target: 'node'
     }, // test
 
     e2e: {
