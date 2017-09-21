@@ -102,6 +102,14 @@ module.exports = {
         plugins: [
             new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
         ]
+    },
+
+    systemjs: {
+        resolve,
+
+        module: {
+            loaders: loaders
+        }
     }
 
 }; // module.exports

@@ -28,7 +28,7 @@ module.exports = function(gulp, libraryName, options) {
         webpackConfig.npmPackage.externals = webpackConfig.npmPackage.externals.concat(options.packageExternals);
     }
 
-    commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS);
+    commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS, options);
 
     gulp.task('test', () =>
         gulp.src(TESTS)
@@ -99,7 +99,7 @@ module.exports = function(gulp, libraryName, options) {
         return merge(tasks);
     });
 
-    gulp.task('build-module', [ 'es-bundle', 'cjs-bundle' ]);
+    gulp.task('build-module', [ 'es-bundle', 'cjs-bundle', 'build-systemjs-bundle' ]);
 
     // Alias for backwards-compatibility
     gulp.task('build-rollup-package', [ 'build-module' ]);
