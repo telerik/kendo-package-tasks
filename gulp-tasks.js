@@ -99,7 +99,7 @@ module.exports = function(gulp, libraryName, options) {
         return merge(tasks);
     });
 
-    gulp.task('build-module', [ 'es-bundle', 'cjs-bundle' ]);
+    gulp.task('build-module', [ 'es-bundle', 'cjs-bundle', 'build-systemjs-bundle' ]);
 
     // Alias for backwards-compatibility
     gulp.task('build-rollup-package', [ 'build-module' ]);
