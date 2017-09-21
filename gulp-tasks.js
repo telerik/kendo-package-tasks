@@ -28,7 +28,7 @@ module.exports = function(gulp, libraryName, options) {
         webpackConfig.npmPackage.externals = webpackConfig.npmPackage.externals.concat(options.packageExternals);
     }
 
-    commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS);
+    commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS, options);
 
     gulp.task('test', () =>
         gulp.src(TESTS)
