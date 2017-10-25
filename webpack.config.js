@@ -30,6 +30,11 @@ const jsonLoader = {
     loader: require.resolve('json-loader')
 };
 
+const prebuilt = [
+    /jszip\/dist\/jszip.js/,
+    /pako\/dist\/pako_deflate.js/
+];
+
 const loaders = [ babelLoader, jsonLoader ];
 
 module.exports = {
@@ -43,7 +48,8 @@ module.exports = {
         ],
 
         module: {
-            loaders: loaders
+            loaders: loaders,
+            noParse: prebuilt
         }
     }, // CDN
 
@@ -58,7 +64,8 @@ module.exports = {
         ].concat(packageDependencies),
 
         module: {
-            loaders: loaders
+            loaders: loaders,
+            noParse: prebuilt
         }
     }, // npmPackage
 
@@ -70,7 +77,8 @@ module.exports = {
         },
 
         module: {
-            loaders: loaders
+            loaders: loaders,
+            noParse: prebuilt
         },
 
         target: 'node'
@@ -95,7 +103,8 @@ module.exports = {
                     loader: require.resolve("source-map-loader")
                 }
             ],
-            loaders: loaders
+            loaders: loaders,
+            noParse: prebuilt
         },
         stats: { colors: true, reasons: true },
         debug: false,
