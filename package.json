@@ -27,7 +27,6 @@
     "chai-jquery": "^2.0.0",
     "gulp-buble": "^0.9.0",
     "gulp-jasmine": "^2.2.1",
-    "gulp-sourcemaps": "2.2.0",
     "jasmine-reporters": "^2.1.1",
     "jasmine-spec-reporter": "^2.4.0",
     "jquery": "^2.2.1",
