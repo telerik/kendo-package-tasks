@@ -10,7 +10,6 @@ const rimraf = require('rimraf');
 const rollup = require('rollup-stream');
 const rollupBuble = require('rollup-plugin-buble');
 const source = require('vinyl-source-stream');
-const sourcemaps = require('gulp-sourcemaps');
 const specReporter = require('jasmine-spec-reporter');
 const webpackConfig = require('./webpack.config.js');
 const argv = require('yargs').argv;
@@ -53,19 +52,16 @@ module.exports = function(gulp, libraryName, options) {
     gulp.task('clean-es-bundle', (done) => rimraf('dist/es', done));
     gulp.task('es-bundle', () =>
         gulp.src(SRC)
-            .pipe(sourcemaps.init())
             .pipe(buble({
                 transforms: {
                     modules: false
                 }
             }))
-            .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest('dist/es'))
     );
 
     gulp.task('es2015-bundle', () =>
         gulp.src(SRC)
-            .pipe(sourcemaps.init())
             .pipe(buble({
                 target: {
                     node: 6
@@ -74,7 +70,6 @@ module.exports = function(gulp, libraryName, options) {
                     modules: false
                 }
             }))
-            .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest('dist/es2015'))
     );
 
@@ -105,10 +100,6 @@ module.exports = function(gulp, libraryName, options) {
             })
             .pipe(source(entry, 'src'))
             .pipe(buffer())
-            .pipe(sourcemaps.init({
-                loadMaps: true
-            }))
-            .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest('dist/npm'))
         );
 
