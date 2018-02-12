@@ -50,13 +50,8 @@ module.exports = function(gulp, libraryName, options) {
     gulp.task('watch-e2e', (done) =>
         commonTasks.startKarma(done, e2eConfigPath, false));
 
-    gulp.task('bundle-typings', [ 'clean-es-bundle' ], () =>
-        gulp.src(TYPINGS)
-            .pipe(gulp.dest('dist/es'))
-    );
-
     gulp.task('clean-es-bundle', (done) => rimraf('dist/es', done));
-    gulp.task('es-bundle', [ 'bundle-typings' ], () =>
+    gulp.task('es-bundle', () =>
         gulp.src(SRC)
             .pipe(sourcemaps.init())
             .pipe(buble({
@@ -93,8 +88,13 @@ module.exports = function(gulp, libraryName, options) {
         .filter((other) => other !== entry)
         .map(ext => path.resolve('./src/' + ext));
 
+    gulp.task('bundle-typings', [ 'clean-cjs-bundle' ], () =>
+        gulp.src(TYPINGS)
+            .pipe(gulp.dest('dist/npm'))
+    );
+
     gulp.task('clean-cjs-bundle', (done) => rimraf('dist/npm', done));
-    gulp.task('cjs-bundle', [ 'clean-cjs-bundle' ], () => {
+    gulp.task('cjs-bundle', [ 'clean-cjs-bundle', 'bundle-typings' ], () => {
         const tasks = entries.map((entry) =>
             rollup({
                 entry: 'src/' + entry,
