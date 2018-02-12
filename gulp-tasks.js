@@ -68,6 +68,22 @@ module.exports = function(gulp, libraryName, options) {
             .pipe(gulp.dest('dist/es'))
     );
 
+    gulp.task('es2015-bundle', () =>
+        gulp.src(SRC)
+            .pipe(sourcemaps.init())
+            .pipe(buble({
+                target: {
+                    node: 6
+                },
+                transforms: {
+                    modules: false
+                }
+            }))
+            .pipe(sourcemaps.write('.'))
+            .pipe(gulp.dest('dist/es2015'))
+    );
+
+
     let entries = [ 'main.js' ];
     if (options && options.entries) {
         entries = options.entries;
@@ -99,7 +115,7 @@ module.exports = function(gulp, libraryName, options) {
         return merge(tasks);
     });
 
-    gulp.task('build-module', [ 'es-bundle', 'cjs-bundle', 'build-systemjs-bundle' ]);
+    gulp.task('build-module', [ 'es-bundle', 'es2015-bundle', 'cjs-bundle', 'build-systemjs-bundle' ]);
 
     // Alias for backwards-compatibility
     gulp.task('build-rollup-package', [ 'build-module' ]);
