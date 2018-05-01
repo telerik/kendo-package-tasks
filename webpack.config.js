@@ -31,8 +31,8 @@ const jsonLoader = {
 };
 
 const prebuilt = [
-    /jszip\/dist\/jszip.js/,
-    /pako\/dist\/pako_deflate.js/
+    /jszip[\/\\]dist[\/\\]jszip.js/,
+    /pako[\/\\]dist[\/\\]pako_deflate.js/
 ];
 
 const loaders = [ babelLoader, jsonLoader ];
