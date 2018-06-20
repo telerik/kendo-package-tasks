@@ -1,5 +1,6 @@
 "use strict";
 
+const argv = require('yargs').argv;
 const buble = require('gulp-buble');
 const buffer = require('vinyl-buffer');
 const commonTasks = require('@telerik/kendo-common-tasks');
@@ -11,8 +12,8 @@ const rollup = require('rollup-stream');
 const rollupBuble = require('rollup-plugin-buble');
 const source = require('vinyl-source-stream');
 const specReporter = require('jasmine-spec-reporter');
+const startServer = require('./dev-server/start');
 const webpackConfig = require('./webpack.config.js');
-const argv = require('yargs').argv;
 
 const SRC = "src/**/*.js";
 const TYPINGS = "src/**/*.d.ts";
@@ -21,6 +22,8 @@ const SRC_TESTS = [ SRC, TESTS ];
 const DTS = "src/*.d.ts";
 const e2eConfigPath = path.join(__dirname, 'e2e.conf.js');
 
+/* eslint-disable no-console */
+
 module.exports = function(gulp, libraryName, options) {
 
     if (options && options.packageExternals) {
@@ -28,6 +31,28 @@ module.exports = function(gulp, libraryName, options) {
     }
 
     commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS, options);
+
+    const devServer = (defaultPort) => (done) => {
+        const port = process.env.PORT || defaultPort;
+        const root = 'examples';
+        const baseUrl = `/${root}`;
+        const settings = {
+            baseUrl,
+            rootDir: `./${root}`,
+            rootFile: 'app.html',
+            entry: 'app.js'
+        };
+
+        const app = startServer(settings);
+        app.set('port', port);
+        app.listen(port, () => {
+            console.info(`Development server listening on http://localhost:${port}${baseUrl}`);
+        });
+
+        process.on('exit', done);
+    };
+
+    gulp.task('start', devServer(3000));
 
     gulp.task('test', () =>
         gulp.src(TESTS)

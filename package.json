@@ -1,5 +1,6 @@
 {
   "name": "@telerik/kendo-package-tasks",
+  "version": "0.0.0-semantically-released",
   "description": "An utility package exporting gulp tasks for Kendo UI NPM packages",
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "chai-jquery": "^2.0.0",
     "gulp-buble": "^0.9.0",
     "gulp-jasmine": "^2.2.1",
+    "html-webpack-plugin": "^2.30.1",
     "jasmine-reporters": "^2.1.1",
     "jasmine-spec-reporter": "^2.4.0",
     "jquery": "^2.2.1",
@@ -38,6 +40,10 @@
     "source-map-loader": "^0.1.5",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
+    "webpack": "~3.6.0",
+    "webpack-dev-middleware": "^1.12.2",
+    "webpack-hot-middleware": "^2.21.2",
+    "webpack-merge": "^4.1.3",
     "yargs": "^3.30.0"
   },
   "author": "Telerik",
@@ -48,7 +54,6 @@
     "eslint": "1.10.3",
     "eslint-plugin-react": "^3.0.0",
     "ghooks": "^1.0.3",
-    "json-loader": "^0.5.4",
     "semantic-release": "^4.3.5",
     "validate-commit-msg": "^1.1.1"
   },
