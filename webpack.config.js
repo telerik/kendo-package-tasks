@@ -51,7 +51,26 @@ module.exports = {
             loaders: loaders,
             noParse: prebuilt
         }
-    }, // CDN
+    },
+
+    umdPackage: commonTasks.webpackThemeConfig({
+        resolve,
+
+        stats: { assets: false },
+
+        output: { libraryTarget: 'umd' },
+
+        externals: packageDependencies,
+
+        plugins: [
+            commonTasks.uglifyJsPlugin()
+        ],
+
+        module: {
+            loaders: loaders,
+            noParse: prebuilt
+        }
+    }), // CDN
 
     npmPackage: {
         resolve,
