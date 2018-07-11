@@ -27,6 +27,17 @@ module.exports = function(gulp, libraryName, options) {
         webpackConfig.npmPackage.externals = webpackConfig.npmPackage.externals.concat(options.packageExternals);
     }
 
+    if (options && options.bundledPackages) {
+        // Include bundledPackages in UMD bundle for StackBlitz.
+        // Used for jsZip in kendo-ooxml
+        webpackConfig.umdPackage.externals = webpackConfig.umdPackage.externals.filter(dep =>
+          options.bundledPackages.reduce(
+            (acc, bundled) => acc && !bundled.match(dep),
+            true
+          )
+        );
+    }
+
     commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS, options);
 
     gulp.task('test', () =>
