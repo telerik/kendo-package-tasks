@@ -29,7 +29,8 @@ module.exports = function(gulp, libraryName, options) {
 
     if (options && options.bundledPackages) {
         // Include bundledPackages in UMD bundle for StackBlitz.
-        // Used for jsZip in kendo-ooxml
+        // Example Usage:
+        //   bundledPackages: [ 'jszip' ]
         const doesNotMatchAny = (regex, arr) => arr.reduce((acc, item) => acc && !item.match(regex), true);
         const shouldExclude = regex => doesNotMatchAny(regex, options.bundledPackages);
         webpackConfig.umdPackage.externals = webpackConfig.umdPackage.externals.filter(shouldExclude);
