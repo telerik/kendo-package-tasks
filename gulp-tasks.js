@@ -30,12 +30,9 @@ module.exports = function(gulp, libraryName, options) {
     if (options && options.bundledPackages) {
         // Include bundledPackages in UMD bundle for StackBlitz.
         // Used for jsZip in kendo-ooxml
-        webpackConfig.umdPackage.externals = webpackConfig.umdPackage.externals.filter(dep =>
-          options.bundledPackages.reduce(
-            (acc, bundled) => acc && !bundled.match(dep),
-            true
-          )
-        );
+        const doesNotMatchAny = (regex, arr) => arr.reduce((acc, item) => acc && !item.match(regex), true);
+        const shouldExclude = regex => doesNotMatchAny(regex, options.bundledPackages);
+        webpackConfig.umdPackage.externals = webpackConfig.umdPackage.externals.filter(shouldExclude);
     }
 
     commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig, DTS, options);
