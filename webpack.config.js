@@ -7,8 +7,12 @@ const nodeModulesPath = path.join(__dirname, 'node_modules');
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
 const packageInfo = require(path.join(process.cwd(), 'package.json'));
-const packageDependencies = Object.keys(packageInfo["dependencies"] || {})
+const packageDependencies =
+    Object.keys(packageInfo["dependencies"] || {}).concat(
+        Object.keys(packageInfo["peerDependencies"] || {})
+    )
     .map(dep => new RegExp(`^${dep}`));
+
 
 const babelLoader = {
     test: /\.js?$/,
